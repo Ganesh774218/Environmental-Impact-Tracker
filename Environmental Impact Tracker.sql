@@ -380,4 +380,15 @@ select * from waste_management;
 -- 17) Top 3 Activities Based On Carbon Reduction
 	select a.name, sum(cf.emissions)as total_emissions from carbon_footprint cf join activities a on cf.activity_id = a.activity_id
     group by a.name order by total_emissions asc limit 3;  
+
+
+-- 18).Find Average Energy Consumption Per Activity
+    select a.name, avg(eu.electricity_kwh) as avg_energy, avg(eu.fuel_liters)as avg_fuel from energy_usage eu
+    join activities a on eu.activity_id = a.activity_id group by a.name order by avg_energy desc;
+    
+ -- 19) Display Energy Usage for Projects That Used More Than 500 kWh
+     select * from energy_usage where electricity_kwh >500;
+     
+-- 20) Get the Total Electricity Usage in the Database
+	 select sum(electricity_kwh) from energy_usage;
     
